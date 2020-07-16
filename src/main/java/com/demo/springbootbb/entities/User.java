@@ -1,9 +1,12 @@
 package com.demo.springbootbb.entities;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
@@ -42,9 +45,24 @@ public class User
 	
 	@Column(name="SSN", length=50, nullable=false, unique=true)  //@Column(name="USER_NAME", length=50, nullable=false, unique=true)
 	private String ssn;
+	                                    //User side is referencing side and Order is the owner side
+	@OneToMany(mappedBy = "user")   // we are going to create foreign key element userid coloumn in the Order table.
+	public List<Order> orders;      // if you see, in general order is the owner of the entire relation.
+	
+	
+	
+	
 
 
-    //no argument constructor .. JPA will not be happy WITHOUT it.    mandatory
+    public List<Order> getOrders() {
+		return orders;
+	}
+
+	public void setOrders(List<Order> orders) {
+		this.orders = orders;
+	}
+
+	//no argument constructor .. JPA will not be happy WITHOUT it.    mandatory
 	public User()
 	{
 		
