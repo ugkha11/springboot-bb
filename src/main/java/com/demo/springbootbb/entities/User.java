@@ -11,19 +11,18 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
-
+import org.springframework.hateoas.RepresentationModel;
 
 
 
 //Entity
 @Entity  //(name="")
 @Table(name="user")
-public class User
-{
+public class User extends RepresentationModel<User> {
 	
 	@Id  //primary key.
 	@GeneratedValue   // auto generate the value for this id field 
-	private long id;
+	private long userid;
 	
 	@NotEmpty(message = "Username is mandatory field. Please provdie username.")
 	
@@ -69,13 +68,12 @@ public class User
 	}
 
     //getters and setters       mandatory
-	public long getId() {
-		return id;
+	public long getUserid() {
+		return userid;
 	}
 
-
-	public void setId(long id) {
-		this.id = id;
+	public void setUserid(long userid) {
+		this.userid = userid;
 	}
 
 
@@ -137,30 +135,33 @@ public class User
 	public void setSsn(String ssn) {
 		this.ssn = ssn;
 	}
+
+	
 	
 	
     //fields constructor
-	public User(long id, String username, String firstname, String lastname, String email, String role, String ssn) {
-		this.id = id;
+	
+	public User(long userid,
+			@NotEmpty(message = "Username is mandatory field. Please provdie username.") String username,
+			@Size(min = 2, message = "FirstName should have at least 2 characters") String firstname, String lastname,
+			String email, String role, String ssn, List<Order> orders) {
+		super();
+		this.userid = userid;
 		this.username = username;
 		this.firstname = firstname;
 		this.lastname = lastname;
 		this.email = email;
 		this.role = role;
 		this.ssn = ssn;
+		this.orders = orders;
 	}
-    
     
     //toString   ..... optionally required for bean logging.
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", username=" + username + ", firstname=" + firstname + ", lastname=" + lastname
-				+ ", email=" + email + ", role=" + role + ", ssn=" + ssn + "]";
+		return "User [userid=" + userid + ", username=" + username + ", firstname=" + firstname + ", lastname="
+				+ lastname + ", email=" + email + ", role=" + role + ", ssn=" + ssn + ", orders=" + orders + "]";
 	}
-	
-	
-	
-	
 	
 
 }
