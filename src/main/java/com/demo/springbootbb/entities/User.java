@@ -13,11 +13,15 @@ import javax.validation.constraints.Size;
 
 import org.springframework.hateoas.RepresentationModel;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 
 
 //Entity
 @Entity  //(name="")
 @Table(name="user")
+@JsonIgnoreProperties({"firstname","lastname"})
 public class User extends RepresentationModel<User> {
 	
 	@Id  //primary key.
@@ -43,6 +47,7 @@ public class User extends RepresentationModel<User> {
 	private String role;
 	
 	@Column(name="SSN", length=50, nullable=false, unique=true)  //@Column(name="USER_NAME", length=50, nullable=false, unique=true)
+	@JsonIgnore 
 	private String ssn;
 	                                    //User side is referencing side and Order is the owner side
 	@OneToMany(mappedBy = "user")   // we are going to create foreign key element userid coloumn in the Order table.
