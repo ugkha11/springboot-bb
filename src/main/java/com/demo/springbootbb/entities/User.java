@@ -13,9 +13,7 @@ import javax.validation.constraints.Size;
 
 import org.springframework.hateoas.RepresentationModel;
 
-import com.fasterxml.jackson.annotation.JsonFilter;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonView;
 
 
 
@@ -23,36 +21,45 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @Entity  //(name="")
 @Table(name="user")
 //@JsonIgnoreProperties({"firstname","lastname"})  -- static filtering
-@JsonFilter(value = "userFilter")
+//@JsonFilter(value = "userFilter")  used for mapping jackson value filtering secction
+
 public class User extends RepresentationModel<User> {
 	
 	@Id  //primary key.
 	@GeneratedValue   // auto generate the value for this id field 
+	@JsonView(Views.External.class)
 	private long userid;
 	
 	@NotEmpty(message = "Username is mandatory field. Please provdie username.")
 	
 	@Column(name="USER_NAME", length=50, nullable=false, unique=true)
+	@JsonView(Views.External.class)
 	private String username;
 	
 	@Size(min = 2, message = "FirstName should have at least 2 characters")
 	@Column(name="FIRST_NAME", length=50, nullable=false)
+	@JsonView(Views.External.class)
 	private String firstname;
 	
 	@Column(name="LAST_NAME", length=50, nullable=false)
+	@JsonView(Views.External.class)
 	private String lastname;
 	
 	@Column(name="EMAIL_ADDRESS", length=50, nullable=false)
+	@JsonView(Views.External.class)
 	private String email;
 	
 	@Column(name="ROLE", length=50, nullable=false)
+	@JsonView(Views.Internal.class)
 	private String role;
 	
 	@Column(name="SSN", length=50, nullable=false, unique=true)  //@Column(name="USER_NAME", length=50, nullable=false, unique=true)
 	//@JsonIgnore  -- static filtering
+	@JsonView(Views.Internal.class)
 	private String ssn;
 	                                    //User side is referencing side and Order is the owner side
 	@OneToMany(mappedBy = "user")   // we are going to create foreign key element userid coloumn in the Order table.
+	@JsonView(Views.Internal.class)
 	public List<Order> orders;      // if you see, in general order is the owner of the entire relation.
 	
 	
