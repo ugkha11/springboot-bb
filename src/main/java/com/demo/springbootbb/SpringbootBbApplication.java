@@ -9,7 +9,7 @@ import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.i18n.AcceptHeaderLocaleResolver;
 // 
-@SpringBootApplication
+@SpringBootApplication //(scanBasePackages = { "com.demo.springbootbb.mappers", "com.demo.springbootbb.repositories","com.demo.springbootbb","com.demo.springbootbb.config","com.demo.springbootbb.controllers","com.demo.springbootbb.dtos","com.demo.springbootbb.entities","com.demo.springbootbb.Exceptions","com.demo.springbootbb.Hello","com.demo.springbootbb.services"})
 public class SpringbootBbApplication {
 
 	public static void main(String[] args) {
