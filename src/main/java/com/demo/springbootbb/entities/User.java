@@ -60,14 +60,24 @@ public class User extends RepresentationModel<User> {
 	                                    //User side is referencing side and Order is the owner side
 	@OneToMany(mappedBy = "user")   // we are going to create foreign key element userid coloumn in the Order table.
 	@JsonView(Views.Internal.class)
-	public List<Order> orders;      // if you see, in general order is the owner of the entire relation.
+	private List<Order> orders;      // if you see, in general order is the owner of the entire relation.
 	
-	
-	
+	@Column(name = "address")
+	public String address;
 	
 
 
-    public List<Order> getOrders() {
+    
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public List<Order> getOrders() {
 		return orders;
 	}
 
@@ -158,7 +168,7 @@ public class User extends RepresentationModel<User> {
 	public User(long userid,
 			@NotEmpty(message = "Username is mandatory field. Please provdie username.") String username,
 			@Size(min = 2, message = "FirstName should have at least 2 characters") String firstname, String lastname,
-			String email, String role, String ssn, List<Order> orders) {
+			String email, String role, String ssn, List<Order> orders, String address) {
 		super();
 		this.userid = userid;
 		this.username = username;
@@ -168,6 +178,7 @@ public class User extends RepresentationModel<User> {
 		this.role = role;
 		this.ssn = ssn;
 		this.orders = orders;
+		this.address = address;
 	}
     
     //toString   ..... optionally required for bean logging.
