@@ -19,11 +19,32 @@
 	</properties>
 
 	<dependencies>
+	<!-- https://mvnrepository.com/artifact/io.micrometer/micrometer-registry-appoptics -->
+<dependency>
+    <groupId>io.micrometer</groupId>
+    <artifactId>micrometer-registry-appoptics</artifactId>
+    <version>1.5.2</version>
+</dependency>
+	
+	<!-- https://mvnrepository.com/artifact/io.micrometer/micrometer-registry-jmx -->
+<dependency>
+    <groupId>io.micrometer</groupId>
+    <artifactId>micrometer-registry-jmx</artifactId>
+    <version>1.5.2</version>
+</dependency>
+	
 	<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.dataformat/jackson-dataformat-xml -->
 <dependency>
     <groupId>com.fasterxml.jackson.dataformat</groupId>
     <artifactId>jackson-dataformat-xml</artifactId>
 </dependency>
+<!-- https://mvnrepository.com/artifact/io.micrometer/micrometer-core -->
+<dependency>
+    <groupId>io.micrometer</groupId>
+    <artifactId>micrometer-core</artifactId>
+    <version>1.5.2</version>
+</dependency>
+
 <!-- https://mvnrepository.com/artifact/de.codecentric/spring-boot-admin-starter-client -->
 <dependency>
     <groupId>de.codecentric</groupId>
